@@ -1,0 +1,77 @@
+- id: poop_closet_nightlight_setup
+  alias: 'Master Poop Closet Nightlight Setup'
+  trigger:
+    platform: time
+    at: '20:00'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.homeseer_hs_ws200_wall_switch_switch
+    - delay: '00:00:01'
+    - service: homeassistant.turn_on
+      data:
+        entity_id: group.poop_closet_lights
+        rgb_color: [255, 0, 0]
+        brightness_pct: 30
+
+- id: poop_closet_daylight_setup
+  alias: 'Master Poop Closet Daylight Setup'
+  trigger:
+    platform: time
+    at: '05:00'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.homeseer_hs_ws200_wall_switch_switch
+    - service: homeassistant.turn_on
+      data:
+        entity_id: group.poop_closet_lights
+        kelvin: 5000
+        brightness_pct: 60
+    - service: switch.turn_off
+      entity_id: switch.homeseer_hs_ws200_wall_switch_switch
+
+- id: poop_closet_nightlight_on
+  alias: 'Master Poop Closet Nightlight On'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.aeotec_zw100_multisensor_6_sensor
+    to: 'on'
+  condition:
+    condition: time
+    after: '20:00:00'
+    before: '05:00:00'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: group.poop_closet_lights
+
+- id: poop_closet_nightlight_off
+  alias: 'Master Poop Closet Nightlight Off'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.aeotec_zw100_multisensor_6_sensor
+      to: 'off'
+      for: '00:01:30'
+    - platform: state
+      entity_id: binary_sensor.master_poop_closet_nightlight
+      to: 'on'
+  condition:
+    condition: time
+    after: '20:00:00'
+    before: '05:00:00'
+  action:
+    - service: homeassistant.turn_off
+      entity_id: group.poop_closet_lights
+
+- id: poop_closet_nightlight_override_switch_turn_off
+  alias: 'Master Poop Closet Nightlight Override Switch Off'
+  trigger:
+    platform: state
+    entity_id: switch.homeseer_hs_ws200_wall_switch_switch
+    to: 'off'
+    for: '00:00:01'
+  condition:
+    condition: time
+    after: '20:00:10'
+    before: '05:00:00'
+  action:
+    service: switch.turn_on
+    entity_id: switch.homeseer_hs_ws200_wall_switch_switch

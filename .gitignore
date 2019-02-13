@@ -1,0 +1,17 @@
+# Whitelist
+!.gitignore
+
+# Ignore folders
+.storage
+.cloud
+
+#ignore files
+*.db
+*.log
+*.sqlite
+
+OZW_Log.txt
+.uuid
+
+# Always ignore!!!
+secrets.yaml

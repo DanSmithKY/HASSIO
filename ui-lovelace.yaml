@@ -1,0 +1,114 @@
+title: DnA Home
+views:
+  - title: Home
+    panel: false
+    icon: mdi:home
+    cards:
+      - type: sensor
+        entity: sensor.dark_sky_apparent_temperature
+        name: Outside Temp
+        graph: line
+      - type: sensor
+        entity: sensor.family_room_thermostat_temperature
+        name: Inside Temp
+        graph: line
+      - type: gauge
+        entity: sensor.family_room_thermostat_humidity
+        name: Inside Humidity
+      - type: gauge
+        entity: sensor.dark_sky_humidity
+        name: Outside Humidity
+      - type: glance
+        entities:
+          - entity: binary_sensor.master_poop_closet_nightlight
+          - entity: switch.espresso_machine
+            tap_action:
+              action: toggle
+
+  - title: Temperature, Humidity, and Weather
+    panel: false
+    icon: mdi:thermometer-lines
+    cards:
+      - type: thermostat
+        entity: climate.family_room
+      - type: entities
+        title: Weather
+        show_header_toggle: false
+        entities:
+          - entity: sensor.dark_sky_temperature
+            name: Temperature
+          - entity: sensor.dark_sky_apparent_temperature
+            name: Feels Like
+          - entity: sensor.dark_sky_humidity
+            name: humidity
+          - entity: sensor.dark_sky_precip_probability
+            name: Precipitation Chance
+            icon: mdi:weather-snowy-rainy
+          - entity: sensor.dark_sky_cloud_coverage
+            name: Clood Coverage
+          - entity: sensor.dark_sky_wind_speed
+            name: Wind Speed
+          - entity: sensor.dark_sky_wind_gust
+            name: Gusts
+      - type: history-graph
+        title: 'Temperature'
+        entities:
+          - entity: sensor.aeotec_zw100_multisensor_6_temperature
+            name: Master Bath
+          - entity: sensor.family_room_thermostat_temperature
+            name: Nest
+          - entity: sensor.dark_sky_temperature
+            name: Dark Sky
+        refresh_interval: 600
+      - type: history-graph
+        title: 'Humidity'
+        entities:
+          - entity: sensor.aeotec_zw100_multisensor_6_relative_humidity
+            name: Master Bath
+          - entity: sensor.family_room_thermostat_humidity
+            name: Nest
+          - entity: sensor.dark_sky_humidity
+            name: Dark Sky
+        refresh_interval: 600
+
+  - title: Automations
+    panel: false
+    icon: mdi:engine
+    cards:
+      - type: entities
+        title: Master Bath
+        show_header_toggle: false
+        entities:
+          - automation.master_poop_closet_daylight_setup
+          - automation.master_poop_closet_nightlight_setup
+          - automation.master_poop_closet_nightlight_on
+          - automation.master_poop_closet_nightlight_off
+          - automation.master_poop_closet_nightlight_override_switch_off
+  
+  - title: System
+    panel: false
+    icon: mdi:raspberrypi
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: glance
+            title: Current
+            entities:
+              - entity: sensor.disk_use_percent_home
+                name: Disk
+              - entity: sensor.memory_use_percent
+                name: Memory
+              - entity: sensor.processor_use
+                name: Processor
+              - entity: sensor.last_boot_date
+                name: Last Boot
+                format: datetime
+          - type: history-graph
+            title: History
+            entities:
+              - entity: sensor.memory_use_percent
+                name: Memory
+              - entity: sensor.processor_use
+                name: Processor
+            refresh_interval: 600
+            hours_to_show: 6
