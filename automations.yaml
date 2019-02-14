@@ -6,7 +6,6 @@
   action:
     - service: switch.turn_on
       entity_id: switch.homeseer_hs_ws200_wall_switch_switch
-    - delay: '00:00:01'
     - service: homeassistant.turn_on
       data:
         entity_id: group.poop_closet_lights
@@ -75,3 +74,21 @@
   action:
     service: switch.turn_on
     entity_id: switch.homeseer_hs_ws200_wall_switch_switch
+
+- id: house_front_nightlight_setup
+  alias: 'Front House Nightlights On'
+  trigger:
+    platform: sun
+    event: sunset
+  action:
+    service: switch.turn_on
+    entity_id: switch.homeseer_hs_ws200_wall_switch_switch_2
+
+- id: house_front_nightlight_disable
+  alias: 'Front House Nightlights Off'
+  trigger:
+    platform: time
+    at: '00:00:00'
+  action:
+    service: switch.turn_off
+    entity_id: switch.homeseer_hs_ws200_wall_switch_switch_2

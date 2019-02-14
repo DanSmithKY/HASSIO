@@ -64,6 +64,7 @@ sensor:
     api_key: !secret darksky_api_key
     forecast:
       - 0
+      - 1
     monitored_conditions:
       - precip_probability
       - temperature
@@ -123,6 +124,7 @@ binary_sensor:
               )
             )
           }}"
+        delay_off: '00:00:02'
 
 # Cloud
 cloud:

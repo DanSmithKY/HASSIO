@@ -21,7 +21,14 @@ views:
       - type: glance
         entities:
           - entity: binary_sensor.master_poop_closet_nightlight
+            name: Master Bath Nightlight
           - entity: switch.espresso_machine
+            icon: mdi:coffee
+            tap_action:
+              action: toggle
+          - entity: switch.homeseer_hs_ws200_wall_switch_switch_2
+            name: Front House Lights
+            icon: mdi:lightbulb
             tap_action:
               action: toggle
 
@@ -39,6 +46,10 @@ views:
             name: Temperature
           - entity: sensor.dark_sky_apparent_temperature
             name: Feels Like
+          - entity: sensor.dark_sky_daily_high_temperature_0
+            name: Today's High
+          - entity: sensor.dark_sky_daily_low_temperature_0
+            name: Today's Low
           - entity: sensor.dark_sky_humidity
             name: humidity
           - entity: sensor.dark_sky_precip_probability
@@ -84,6 +95,12 @@ views:
           - automation.master_poop_closet_nightlight_on
           - automation.master_poop_closet_nightlight_off
           - automation.master_poop_closet_nightlight_override_switch_off
+      - type: entities
+        title: House Lights
+        show_header_toggle: false
+        entities:
+          - automation.front_house_nightlights_on
+          - automation.front_house_nightlights_off 
   
   - title: System
     panel: false
