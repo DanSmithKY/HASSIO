@@ -22,7 +22,8 @@ views:
         entities:
           - entity: binary_sensor.master_poop_closet_nightlight
             name: Master Bath Nightlight
-          - entity: switch.espresso_machine
+          - entity: switch.aeotec_zw096_smart_switch_6_switch
+            name: Espresso Machine
             icon: mdi:coffee
             tap_action:
               action: toggle
@@ -31,6 +32,8 @@ views:
             icon: mdi:lightbulb
             tap_action:
               action: toggle
+          - entity: binary_sensor.aeotec_zw112_door_window_sensor_6_sensor
+            name: Garage Door
 
   - title: Temperature, Humidity, and Weather
     panel: false
@@ -66,6 +69,8 @@ views:
         entities:
           - entity: sensor.aeotec_zw100_multisensor_6_temperature
             name: Master Bath
+          - entity: sensor.aeotec_zw100_multisensor_6_temperature_2
+            name: Family Room
           - entity: sensor.family_room_thermostat_temperature
             name: Nest
           - entity: sensor.dark_sky_temperature
@@ -76,6 +81,8 @@ views:
         entities:
           - entity: sensor.aeotec_zw100_multisensor_6_relative_humidity
             name: Master Bath
+          - entity: sensor.aeotec_zw100_multisensor_6_relative_humidity_2
+            name: Family Room
           - entity: sensor.family_room_thermostat_humidity
             name: Nest
           - entity: sensor.dark_sky_humidity
@@ -100,7 +107,14 @@ views:
         show_header_toggle: false
         entities:
           - automation.front_house_nightlights_on
-          - automation.front_house_nightlights_off 
+          - automation.front_house_nightlights_off
+      - type: entities
+        title: Espresso Machine
+        show_header_toggle: false
+        entities:
+          - automation.espresso_machine_morning_coffee_on
+          - automation.espresso_machine_morning_coffee_off_week
+          - automation.espresso_machine_morning_coffee_off_weekend
   
   - title: System
     panel: false

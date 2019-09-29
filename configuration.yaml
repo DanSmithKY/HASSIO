@@ -120,11 +120,11 @@ binary_sensor:
               or
               (
                 is_state('light.aeotec_zw098_led_bulb_level', 'off')
-                and is_state('light.aeotec_zw098_led_bulb_level', 'off')
+                and is_state('light.aeotec_zw098_led_bulb_level_2', 'off')
               )
             )
           }}"
-        delay_off: '00:00:02'
+        delay_off: '00:00:05'
 
 # Cloud
 cloud:
@@ -141,6 +141,7 @@ climate:
 # Z-Wave
 zwave:
   usb_path: /dev/ttyACM0
+  network_key: !secret zwave_network_key
 
 # Included files
 group: !include groups.yaml
