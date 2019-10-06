@@ -1,0 +1,7 @@
+alias: espresso_machine_morning_coffee_on
+trigger:
+  platform: time
+  at: '04:00'
+action:
+  - service: switch.turn_on
+    entity_id: switch.aeotec_zw096_smart_switch_6_switch

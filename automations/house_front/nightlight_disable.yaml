@@ -1,0 +1,7 @@
+alias: house_front_nightlight_disable
+trigger:
+  platform: sun
+  event: sunrise
+action:
+  service: switch.turn_off
+  entity_id: switch.homeseer_hs_ws200_wall_switch_switch_2

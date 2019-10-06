@@ -1,0 +1,3 @@
+binary_sensor.aeotec_zw112_door_window_sensor_6_sensor:
+  hidden: false
+  device_class: door

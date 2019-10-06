@@ -1,149 +1,19 @@
 homeassistant:
   # Name of the location where Home Assistant is running
   name: Home
+
   # Location required to calculate the time the sun rises and sets
   latitude: !secret home_latitude
   longitude: !secret home_longitude
+
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: !secret home_elevation
+
   # metric for Metric, imperial for Imperial
   unit_system: imperial
+
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: !secret time_zone
-  # Customization file
-  customize: !include customize.yaml
 
-# Show links to resources in log and frontend
-introduction:
-
-# Enables the frontend
-frontend:
-  javascript_version: latest
-
-# Enables configuration UI
-config:
-
-lovelace:
-  mode: yaml
-
-# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-# http:
-#   base_url: example.duckdns.org:8123
-
-# Checks for available updates
-# Note: This component will send some information about your system to
-# the developers to assist with development of Home Assistant.
-# For more information, please see:
-# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
-updater:
-  # Optional, allows Home Assistant developers to focus on popular components.
-  # include_used_components: true
-
-# Discover some devices automatically
-discovery:
-
-# Allows you to issue voice commands from the frontend in enabled browsers
-conversation:
-
-# Enables support for tracking state changes over time
-history:
-
-# View all events in a logbook
-logbook:
-
-# Enables a map showing the location of tracked devices
-map:
-
-# Track the sun
-sun:
-
-# Sensors
-sensor:
-  # Dark Sky weather
-  - platform: darksky
-    api_key: !secret darksky_api_key
-    forecast:
-      - 0
-      - 1
-    monitored_conditions:
-      - precip_probability
-      - temperature
-      - apparent_temperature
-      - wind_speed
-      - wind_gust
-      - cloud_cover
-      - humidity
-      - temperature_max
-      - temperature_min
-      - apparent_temperature_max
-      - apparent_temperature_min
-      - precip_intensity_max
-    units: us
-    update_interval:
-      minutes: 5
-    language: en
-
-  # Raspberry Pi system monitor
-  - platform: systemmonitor
-    resources:
-      - type: disk_use_percent
-        arg: /home
-      - type: memory_use_percent
-      - type: processor_use
-      - type: last_boot
-
-  # Templates
-  - platform: template
-    sensors:
-      last_boot_date:
-        friendly_name: "Last Boot"
-        value_template: '{{ states.sensor.last_boot.state.split("T")[0] }}'
-        icon_template: mdi:clock
-
-binary_sensor:
-  # Master Bathroom Nightlight
-  - platform: template
-    sensors:
-      master_poop_closet_nightlight:
-        friendly_name: "Master Bathroom Nightlight"
-        value_template:
-          "{{
-            (
-              is_state('switch.homeseer_hs_ws200_wall_switch_switch', 'on')
-            )
-            and
-            (
-              (
-                is_state_attr('light.aeotec_zw098_led_bulb_level', 'rgb_color', (255, 0, 0))
-                and is_state_attr('light.aeotec_zw098_led_bulb_level_2', 'rgb_color', (255, 0, 0))
-              )
-              or
-              (
-                is_state('light.aeotec_zw098_led_bulb_level', 'off')
-                and is_state('light.aeotec_zw098_led_bulb_level_2', 'off')
-              )
-            )
-          }}"
-        delay_off: '00:00:05'
-
-# Cloud
-cloud:
-
-# Nest
-nest:
-  client_id: !secret nest_clientID
-  client_secret: !secret nest_secret
-
-# Thermostat (needed?)
-climate:
-  platform: nest
-
-# Z-Wave
-zwave:
-  usb_path: /dev/ttyACM0
-  network_key: !secret zwave_network_key
-
-# Included files
-group: !include groups.yaml
-automation: !include automations.yaml
-script: !include scripts.yaml
+  # Packages directory
+  packages: !include_dir_named packages

@@ -1,0 +1,4 @@
+name: Poop Closet Lights
+entities:
+  - light.aeotec_zw098_led_bulb_level
+  - light.aeotec_zw098_led_bulb_level_2

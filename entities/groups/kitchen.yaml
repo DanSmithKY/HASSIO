@@ -1,0 +1,3 @@
+name: Kitchen
+entities:
+  - switch.espresso_machine

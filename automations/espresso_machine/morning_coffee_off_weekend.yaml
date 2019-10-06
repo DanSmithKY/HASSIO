@@ -1,0 +1,12 @@
+alias: espresso_machine_morning_coffee_off_weekend
+trigger:
+  platform: time
+  at: '16:00'
+condition:
+  condition: time
+  weekday:
+    - sat
+    - sun
+action:
+  - service: switch.turn_off
+    entity_id: switch.aeotec_zw096_smart_switch_6_switch

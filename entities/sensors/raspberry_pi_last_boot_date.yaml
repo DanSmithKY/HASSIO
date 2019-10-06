@@ -1,0 +1,6 @@
+platform: template
+sensors:
+  last_boot_date:
+    friendly_name: "Last Boot"
+    value_template: '{{ states.sensor.last_boot.state.split("T")[0] }}'
+    icon_template: mdi:clock

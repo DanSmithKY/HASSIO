@@ -1,0 +1,5 @@
+name: Poop Closet
+entities:
+  - switch.homeseer_hs_ws200_wall_switch_switch
+  - light.aeotec_zw098_led_bulb_level
+  - light.aeotec_zw098_led_bulb_level_2

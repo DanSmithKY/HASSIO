@@ -1,3 +1,0 @@
-wait_for_state:
-  sequence:
-    - wait_template: "{{ not is_state(me, my_state) }}"

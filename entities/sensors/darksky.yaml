@@ -1,0 +1,22 @@
+platform: darksky
+api_key: !secret darksky_api_key
+forecast:
+  - 0
+  - 1
+monitored_conditions:
+  - precip_probability
+  - temperature
+  - apparent_temperature
+  - wind_speed
+  - wind_gust
+  - cloud_cover
+  - humidity
+  - temperature_max
+  - temperature_min
+  - apparent_temperature_max
+  - apparent_temperature_min
+  - precip_intensity_max
+units: us
+update_interval:
+  minutes: 5
+language: en

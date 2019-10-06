@@ -1,0 +1,3 @@
+nest:
+  client_id: !secret nest_clientID
+  client_secret: !secret nest_secret

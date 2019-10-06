@@ -1,0 +1,4 @@
+name: Sensors
+view: true
+entities:
+  - group.Aeotec_Multisensor_6

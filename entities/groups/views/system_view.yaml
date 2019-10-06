@@ -1,0 +1,7 @@
+name: System
+view: true
+entities:
+  - sensor.disk_use_percent
+  - sensor.memory_use_percent
+  - sensor.processor_use
+  - sensor.last_boot
