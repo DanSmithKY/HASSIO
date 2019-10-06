@@ -13,7 +13,7 @@ views:
         name: Inside Temp
         graph: line
       - type: gauge
-        entity: sensor.family_room_thermostat_humidity
+        entity: sensor.aeotec_zw100_multisensor_6_relative_humidity_2
         name: Inside Humidity
       - type: gauge
         entity: sensor.dark_sky_humidity
