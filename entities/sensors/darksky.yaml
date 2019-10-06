@@ -11,12 +11,12 @@ monitored_conditions:
   - wind_gust
   - cloud_cover
   - humidity
-  - temperature_max
-  - temperature_min
-  - apparent_temperature_max
-  - apparent_temperature_min
+  - temperature_high
+  - temperature_low
+  - apparent_temperature_high
+  - apparent_temperature_low
   - precip_intensity_max
 units: us
-update_interval:
+scan_interval:
   minutes: 5
 language: en

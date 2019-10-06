@@ -49,9 +49,9 @@ views:
             name: Temperature
           - entity: sensor.dark_sky_apparent_temperature
             name: Feels Like
-          - entity: sensor.dark_sky_daily_high_temperature_0
+          - entity: sensor.dark_sky_daily_high_temperature_0d
             name: Today's High
-          - entity: sensor.dark_sky_daily_low_temperature_0
+          - entity: sensor.dark_sky_daily_low_temperature_0d
             name: Today's Low
           - entity: sensor.dark_sky_humidity
             name: humidity
@@ -118,7 +118,7 @@ views:
   
   - title: System
     panel: false
-    icon: mdi:raspberrypi
+    icon: mdi:raspberry-pi
     cards:
       - type: vertical-stack
         cards:
