@@ -1,0 +1,6 @@
+recorder:
+  exclude:
+    domains:
+      - automation
+    entities:
+      - sun.sun
