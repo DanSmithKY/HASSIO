@@ -1,0 +1,10 @@
+alias: doors_notify_discord
+trigger:
+  platform: state
+  entity_id: binary_sensor.aeotec_zw112_door_window_sensor_6_sensor
+  to: 'on'
+action:
+  service: notify.discord_general
+  data:
+    message: "Interior garage door opened!"
+    target: [!secret discord_channel_id_general]
