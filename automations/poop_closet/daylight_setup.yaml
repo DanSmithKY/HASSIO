@@ -5,16 +5,16 @@ trigger:
   - event_type: zwave.scene_activated
     platform: event
     event_data:
-      entity_id: zwave.homeseer_hs_ws200_wall_switch
+      entity_id: zwave.homeseer_technologies_hs_ws200_wall_switch
       scene_id: 1
       scene_data: 7860
 action:
   - service: switch.turn_on
-    entity_id: switch.homeseer_hs_ws200_wall_switch_switch
+    entity_id: switch.homeseer_technologies_hs_ws200_wall_switch_switch
   - service: homeassistant.turn_on
     data:
       entity_id: group.poop_closet_lights
       kelvin: 5000
       brightness_pct: 60
   - service: switch.turn_off
-    entity_id: switch.homeseer_hs_ws200_wall_switch_switch
+    entity_id: switch.homeseer_technologies_hs_ws200_wall_switch_switch
