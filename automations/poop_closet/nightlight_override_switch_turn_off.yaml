@@ -5,9 +5,9 @@ trigger:
   to: 'off'
   for: '00:00:01'
 condition:
-  condition: time
-  after: '20:00:10'
-  before: '05:15:00'
+  condition: state
+  entity_id: binary_sensor.bedtime
+  state: 'on'
 action:
   service: switch.turn_on
   entity_id: switch.homeseer_technologies_hs_ws200_wall_switch_switch

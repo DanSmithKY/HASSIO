@@ -1,0 +1,10 @@
+platform: template
+sensors:
+  playtime:
+    friendly_name: 'Playtime'
+    value_template:
+      "{{
+        now().hour >= 16
+        and now().hour <= 20
+      }}"
+    entity_id: sensor.time

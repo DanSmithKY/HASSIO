@@ -3,14 +3,14 @@ trigger:
   - platform: state
     entity_id: binary_sensor.aeotec_zw100_multisensor_6_sensor
     to: 'off'
-    for: '00:01:30'
+    for: '00:02:00'
   - platform: state
     entity_id: binary_sensor.master_poop_closet_nightlight
     to: 'on'
 condition:
-  condition: time
-  after: '20:00:00'
-  before: '05:15:00'
+  condition: state
+  entity_id: binary_sensor.bedtime
+  state: 'on'
 action:
   - service: homeassistant.turn_off
     entity_id: group.poop_closet_lights

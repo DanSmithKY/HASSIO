@@ -1,0 +1,10 @@
+platform: template
+sensors:
+  bedtime:
+    friendly_name: 'Bedtime'
+    value_template:
+      "{{
+        now().hour >= 20
+        and now().hour <= 5
+      }}"
+    entity_id: sensor.time

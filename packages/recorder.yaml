@@ -4,3 +4,4 @@ recorder:
       - automation
     entities:
       - sun.sun
+      - sensor.time

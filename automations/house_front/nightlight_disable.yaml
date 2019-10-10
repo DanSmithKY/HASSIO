@@ -3,5 +3,9 @@ trigger:
   platform: sun
   event: sunrise
 action:
-  service: switch.turn_off
-  entity_id: switch.homeseer_hs_ws200_wall_switch_switch_2
+  - service: switch.turn_off
+    entity_id: switch.homeseer_hs_ws200_wall_switch_switch_2
+  - service: notify.discord_general
+    data:
+      message: "House front lights off."
+      target: [!secret discord_channel_id_general]

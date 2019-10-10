@@ -49,10 +49,14 @@ views:
             name: Temperature
           - entity: sensor.dark_sky_apparent_temperature
             name: Feels Like
-          - entity: sensor.dark_sky_daily_high_temperature_0d
+          - entity: sensor.dark_sky_daytime_high_temperature_0d
             name: Today's High
-          - entity: sensor.dark_sky_daily_low_temperature_0d
-            name: Today's Low
+          - entity: sensor.dark_sky_daytime_high_apparent_temperature_0d
+            name: Today's Feels Like High
+          - entity: sensor.dark_sky_overnight_low_temperature_0d
+            name: Tonight's Low
+          - entity: sensor.dark_sky_overnight_low_apparent_temperature_0d
+            name: Tonight's Feels Like Low
           - entity: sensor.dark_sky_humidity
             name: humidity
           - entity: sensor.dark_sky_precip_probability
@@ -148,3 +152,18 @@ views:
                 name: Processor
             refresh_interval: 600
             hours_to_show: 6
+  - title: Test
+    panel: false
+    icon: mdi:test-tube
+    cards:
+      - type: glance
+        entities:
+          - entity: binary_sensor.bedtime
+            name: Bedtime
+            icon: mdi:sleep
+          - entity: binary_sensor.worktime
+            name: Worktime
+            icon: mdi:worker
+          - entity: binary_sensor.playtime
+            name: Playtime
+            icon: mdi:party-popper

@@ -1,7 +1,8 @@
 alias: poop_closet_nightlight_setup
 trigger:
-  - platform: time
-    at: '20:00'
+  - platform: state
+    entity_id: binary_sensor.bedtime
+    to: 'on'
   - event_type: zwave.scene_activated
     platform: event
     event_data:

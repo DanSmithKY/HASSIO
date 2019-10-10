@@ -1,0 +1,10 @@
+platform: template
+sensors:
+  worktime:
+    friendly_name: 'Worktime'
+    value_template:
+      "{{
+        now().hour >= 6
+        and now().hour <= 16
+      }}"
+    entity_id: sensor.time
