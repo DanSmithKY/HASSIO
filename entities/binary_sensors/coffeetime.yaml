@@ -1,0 +1,20 @@
+platform: template
+sensors:
+  coffeetime:
+    friendly_name: 'Coffeetime'
+    value_template:
+      "{{
+        states('sensor.time') >= '04:30'
+        and
+        (
+          (
+            states('sensor.time') < '09:00'
+            and now().weekday() < 5
+          )
+          or
+          (
+            states('sensor.time') < '14:00'
+            and now().weekday() > 4
+          )
+        )
+      }}"

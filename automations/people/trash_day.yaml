@@ -1,0 +1,14 @@
+alias: people_trash_day
+trigger:
+  platform: state
+  entity_id: binary_sensor.bedtime
+  to: 'off'
+condition:
+  condition: time
+  weekday:
+    - wed
+action:
+  service: notify.discord_general
+  data:
+    message: "Trash day!"
+    target: [!secret discord_channel_id_general]

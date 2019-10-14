@@ -1,0 +1,9 @@
+alias: home_assistant_start
+trigger:
+  platform: homeassistant
+  event: start
+action:
+  service: notify.discord_general
+  data:
+    message: "Home Assistant started!"
+    target: [!secret discord_channel_id_general]

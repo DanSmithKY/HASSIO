@@ -20,4 +20,5 @@ sensors:
           )
         )
       }}"
+    delay_on: '00:00:05'
     delay_off: '00:00:05'

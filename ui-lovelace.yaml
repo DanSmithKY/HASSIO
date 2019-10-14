@@ -123,7 +123,9 @@ views:
         title: Notifications
         show_header_toggle: false
         entities:
-          - automation.doors_notify_discord
+          - automation.doors_interior_garage_opened
+          - automation.poop_closet_nightlight_turned_on
+          - automation.poop_closet_nightlight_turned_off
   
   - title: System
     panel: false
@@ -152,6 +154,7 @@ views:
                 name: Processor
             refresh_interval: 600
             hours_to_show: 6
+
   - title: Test
     panel: false
     icon: mdi:test-tube
@@ -161,9 +164,18 @@ views:
           - entity: binary_sensor.bedtime
             name: Bedtime
             icon: mdi:sleep
+          - entity: binary_sensor.coffeetime
+            name: Coffeetime
+            icon: mdi:coffee
           - entity: binary_sensor.worktime
             name: Worktime
             icon: mdi:worker
           - entity: binary_sensor.playtime
             name: Playtime
             icon: mdi:party-popper
+          - entity: binary_sensor.work_week
+            name: Work Week
+            icon: mdi:worker
+          - entity: binary_sensor.master_bath_too_humid
+            name: Master Bath Too Humid
+            icon: mdi:water-percent

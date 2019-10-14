@@ -8,4 +8,4 @@ action:
   - service: notify.discord_general
     data:
       message: "House front lights on."
-      target: [!secret discord_channel_id_general]
+      target: [!secret discord_channel_id_scheduled_automations]

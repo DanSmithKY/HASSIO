@@ -1,0 +1,19 @@
+alias: people_worktime_motivation
+trigger:
+  platform: state
+  entity_id: binary_sensor.worktime
+  to: 'on'
+action:
+  service: notify.discord_general
+  data:
+    message: >
+      {{
+        (
+          "See ya later, Dan. At least someone around here works...",
+          "Congrats Ash, you don't have to see Dan for hours!",
+          "See y'all later. I'll just hang out here...",
+          "See ya! Wouldn't want to be ya!",
+          "I'm gonna stay. I'll be here if you need me."
+        )|random
+      }}
+    target: [!secret discord_channel_id_automations]

@@ -1,0 +1,19 @@
+alias: people_bedtime_stories
+trigger:
+  platform: state
+  entity_id: binary_sensor.bedtime
+  to: 'on'
+action:
+  service: notify.discord_general
+  data:
+    message: >
+      {{
+        (
+          "Get to bed, Ashly!",
+          "Oooh, is Ashly going to lose some of that clothing?",
+          "It's time for bed! ASHLY!",
+          "Ashly, get that fine ass of yours in bed!",
+          "You two should take it to the bedroom. Wink, wink."
+        )|random
+      }}
+    target: [!secret discord_channel_id_general]

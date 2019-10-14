@@ -1,10 +1,10 @@
-alias: poop_closet_nightlight_turned_on
+alias: poop_closet_nightlight_turned_off
 trigger:
   platform: state
   entity_id: binary_sensor.master_poop_closet_nightlight
-  to: 'on'
+  to: 'off'
 action:
   - service: notify.discord_general
     data:
-      message: "Master bathroom nightlight on."
+      message: "Master bathroom nightlight off."
       target: [!secret discord_channel_id_scheduled_automations]

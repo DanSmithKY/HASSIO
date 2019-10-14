@@ -1,0 +1,13 @@
+alias: master_bath_not_too_humid
+trigger:
+  platform: state
+  entity_id: binary_sensor.master_bath_too_humid
+  to: 'off'
+  for: '00:02:00'
+action:
+  - service: notify.discord_general
+    data:
+      message: "Turn the vent off!"
+      target: [!secret discord_channel_id_automations]
+  - service: switch.turn_off
+    entity_id: switch.homeseer_technologies_hs_ws200_wall_switch_switch_2

@@ -4,7 +4,6 @@ sensors:
     friendly_name: 'Bedtime'
     value_template:
       "{{
-        now().hour >= 20
-        and now().hour <= 5
+        states('sensor.time') >= '20:00'
+        or states('sensor.time') < '05:00'
       }}"
-    entity_id: sensor.time

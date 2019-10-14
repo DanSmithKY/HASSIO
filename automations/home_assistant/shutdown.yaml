@@ -1,0 +1,9 @@
+alias: home_assistant_shutdown
+trigger:
+  platform: homeassistant
+  event: shutdown
+action:
+  service: notify.discord_general
+  data:
+    message: "Home Assistant shutdown!"
+    target: [!secret discord_channel_id_general]

@@ -1,4 +1,4 @@
-alias: doors_notify_discord
+alias: doors_interior_garage_opened
 trigger:
   platform: state
   entity_id: binary_sensor.aeotec_zw112_door_window_sensor_6_sensor

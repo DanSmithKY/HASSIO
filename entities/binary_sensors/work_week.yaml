@@ -1,0 +1,13 @@
+platform: template
+sensors:
+  work_week:
+    friendly_name: 'Work Week'
+    value_template:
+      "{{
+        now().weekday() < 4
+        or
+        (
+          now().weekday() == 4
+          and states('sensor.time') <= '16:00'
+        )
+      }}"

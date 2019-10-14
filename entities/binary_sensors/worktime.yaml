@@ -4,7 +4,7 @@ sensors:
     friendly_name: 'Worktime'
     value_template:
       "{{
-        now().hour >= 6
-        and now().hour <= 16
+        states('sensor.time') >= '06:00'
+        and states('sensor.time') < '16:00'
+        and states('binary_sensor.workweek') == 'on'
       }}"
-    entity_id: sensor.time

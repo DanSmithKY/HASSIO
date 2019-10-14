@@ -1,0 +1,10 @@
+alias: climate_fan_off
+trigger:
+  platform: state
+  entity_id: binary_sensor.family_room_thermostat_fan
+  to: 'off'
+action:
+  service: notify.discord_general
+  data:
+    message: "Climate off ({{ states('sensor.family_room_thermostat_operation_mode') }})."
+    target: [!secret discord_channel_id_automations]

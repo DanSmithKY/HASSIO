@@ -4,7 +4,12 @@ sensors:
     friendly_name: 'Playtime'
     value_template:
       "{{
-        now().hour >= 16
-        and now().hour <= 20
+        (
+          now().weekday() > 4
+        )
+        or
+        (
+          states('sensor.time') >= '16:00'
+          and states('sensor.time') < '20:00'
+        )
       }}"
-    entity_id: sensor.time

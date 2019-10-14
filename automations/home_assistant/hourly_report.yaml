@@ -1,0 +1,12 @@
+alias: home_assistant_hourly_report
+trigger:
+  platform: time_pattern
+  minutes: 0
+action:
+  service: notify.discord_general
+  data:
+    message: |
+      Home Report
+      temp = {{ states('sensor.aeotec_zw100_multisensor_6_temperature_2') }}
+      humidity = {{ states('sensor.aeotec_zw100_multisensor_6_relative_humidity_2') }}
+    target: [!secret discord_channel_id_reports]
