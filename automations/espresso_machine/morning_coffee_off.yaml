@@ -1,8 +1,8 @@
-alias: espresso_machine_morning_coffee_on
+alias: espresso_machine_morning_coffee_off
 trigger:
   platform: state
   entity_id: binary_sensor.coffeetime
-  to: 'on'
+  to: 'off'
 action:
-  - service: switch.turn_on
+  - service: switch.turn_off
     entity_id: switch.aeotec_zw096_smart_switch_6_switch

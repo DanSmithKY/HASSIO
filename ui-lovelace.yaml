@@ -117,8 +117,7 @@ views:
         show_header_toggle: false
         entities:
           - automation.espresso_machine_morning_coffee_on
-          - automation.espresso_machine_morning_coffee_off_week
-          - automation.espresso_machine_morning_coffee_off_weekend
+          - automation.espresso_machine_morning_coffee_off
       - type: entities
         title: Notifications
         show_header_toggle: false

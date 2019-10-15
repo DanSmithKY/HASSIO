@@ -6,4 +6,4 @@ action:
   service: notify.discord_general
   data:
     message: "Home Assistant shutdown!"
-    target: [!secret discord_channel_id_general]
+    target: [!secret discord_channel_id_system]
