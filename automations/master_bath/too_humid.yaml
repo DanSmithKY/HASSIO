@@ -3,6 +3,7 @@ trigger:
   platform: state
   entity_id: binary_sensor.master_bath_too_humid
   to: 'on'
+  from: 'off'
   for: '00:01:00'
 action:
   - service: notify.discord_general

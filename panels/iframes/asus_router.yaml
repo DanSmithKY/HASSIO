@@ -1,0 +1,5 @@
+asus_router:
+  title: 'Router'
+  icon: mdi:router-wireless
+  url: !secret asus_router_url
+  require_admin: true

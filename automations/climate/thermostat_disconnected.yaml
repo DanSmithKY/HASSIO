@@ -1,0 +1,11 @@
+alias: climate_thermostat_disconnected
+trigger:
+  platform: state
+  entity_id: binary_sensor.family_room_thermostat_online
+  to: 'off'
+  from: 'on'
+action:
+  service: notify.discord_general
+  data:
+    message: "Thermostat disconnected!"
+    target: [!secret discord_channel_id_warning]

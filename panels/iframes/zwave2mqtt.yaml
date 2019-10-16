@@ -1,0 +1,5 @@
+zwave2mqtt:
+  title: 'ZWave 2 MQTT'
+  icon: mdi:z-wave
+  url: !secret zwave_to_mqtt_url
+  require_admin: true

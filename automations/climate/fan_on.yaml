@@ -6,5 +6,5 @@ trigger:
 action:
   service: notify.discord_general
   data:
-    message: "Climate on ({{ states('sensor.family_room_thermostat_operation_mode') }})."
+    message: "Climate on ({{ states('sensor.family_room_thermostat_hvac_state') }})."
     target: [!secret discord_channel_id_automations]
