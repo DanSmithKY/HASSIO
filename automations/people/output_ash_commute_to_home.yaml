@@ -1,0 +1,23 @@
+alias: people_output_ash_commute_to_home
+initial_state: 'on'
+trigger:
+  - platform: template
+    value_template: "{{ states('sensor.time') == ((state_attr('input_datetime.ash_comehome_time', 'timestamp') - (900)) | timestamp_custom('%H:%M', False)) }}"
+condition:
+  condition: state
+  entity_id: binary_sensor.workday_ash
+  state: 'on'
+action:
+  - service: homeassistant.update_entity
+    entity_id: sensor.ash_commute_to_home
+  - service: notify.discord_general
+    data_template:
+      message: |
+        {{ states('input_text.discord_user_ash') }}
+        __**Afternoon Commute**__
+        >>> 
+            travel time
+                `{{ states('sensor.ash_commute_to_home') }} minutes`
+            route
+                `{{ state_attr('sensor.ash_commute_to_home', 'route') }}`
+      target: [!secret discord_channel_id_commute]

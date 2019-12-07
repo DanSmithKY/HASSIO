@@ -1,0 +1,12 @@
+platform: here_travel_time
+name: ash_commute_to_home
+app_id: !secret here_app_id
+app_code: !secret here_app_code
+origin_latitude: !secret ash_work_latitude
+origin_longitude: !secret ash_work_longitude
+destination_latitude: !secret home_latitude
+destination_longitude: !secret home_longitude
+mode: car
+route_mode: shortest
+traffic_mode: true
+scan_interval: 2628000

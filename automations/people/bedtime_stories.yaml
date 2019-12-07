@@ -5,15 +5,17 @@ trigger:
   to: 'on'
 action:
   service: notify.discord_general
-  data:
-    message: >
-      {{
+  data_template:
+    message: |
+      {{ states('input_text.discord_user_everyone') }}
+      >>> {{
         (
-          "Get to bed, Ashly!",
+          "Get to bed, Humans!",
           "Oooh, is Ashly going to lose some of that clothing?",
-          "It's time for bed! ASHLY!",
+          "It's time for bed you two!",
           "Ashly, get that fine ass of yours in bed!",
-          "You two should take it to the bedroom. Wink, wink."
+          "You two should take it to the bedroom. Wink, wink.",
+          "I've heard that the beautiful princess Ashly sleeps here."
         )|random
       }}
     target: [!secret discord_channel_id_general]

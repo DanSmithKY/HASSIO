@@ -1,0 +1,24 @@
+alias: climate_thermostat_wake_up
+trigger:
+  - platform: state
+    entity_id: binary_sensor.family_room_multisensor_contact
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.game_room_multisensor_contact
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.master_bath_multisensor_contact
+    to: 'on'
+condition:
+  condition: state
+  entity_id: binary_sensor.family_room_thermostat_has_leaf
+  state: 'on'
+action:
+  - service: climate.set_preset_mode
+    data:
+      entity_id: climate.family_room
+      preset_mode: 'none'
+  - service: notify.discord_general
+    data:
+      message: "Hey Nest! Somebody's home!"
+      target: [!secret discord_channel_id_automations]

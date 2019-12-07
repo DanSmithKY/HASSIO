@@ -1,0 +1,22 @@
+alias: people_work_week_ending
+trigger:
+  platform: state
+  entity_id: binary_sensor.work_week
+  to: 'off'
+action:
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.ash_working_mon
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.ash_working_tues
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.ash_working_wed
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.ash_working_thurs
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.ash_working_fri
+  - service: notify.discord_general
+    data_template:
+      message: |
+        {{ states('input_text.discord_user_ash') }}
+        Someone needs to put their schedule in for next week!
+      target: [!secret discord_channel_id_general]

@@ -1,0 +1,26 @@
+alias: people_output_ash_commute_to_work
+initial_state: 'on'
+trigger:
+  - platform: time_pattern
+    minutes: '/15'
+condition:
+  - condition: time
+    after: '06:00:00'
+    before: '07:00:00'
+  - condition: state
+    entity_id: binary_sensor.workday_ash
+    state: 'on'
+action:
+  - service: homeassistant.update_entity
+    entity_id: sensor.ash_commute_to_work
+  - service: notify.discord_general
+    data_template:
+      message: |
+        {{ states('input_text.discord_user_ash') }}
+        __**Morning Commute**__
+        >>> 
+            travel time
+                `{{ states('sensor.ash_commute_to_work') }} minutes`
+            route
+                `{{ state_attr('sensor.ash_commute_to_work', 'route') }}`
+      target: [!secret discord_channel_id_commute]

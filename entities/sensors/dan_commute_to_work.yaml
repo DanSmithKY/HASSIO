@@ -1,0 +1,12 @@
+platform: here_travel_time
+name: dan_commute_to_work
+app_id: !secret here_app_id
+app_code: !secret here_app_code
+origin_latitude: !secret home_latitude
+origin_longitude: !secret home_longitude
+destination_latitude: !secret dan_work_latitude
+destination_longitude: !secret dan_work_longitude
+mode: car
+route_mode: shortest
+traffic_mode: true
+scan_interval: 2628000

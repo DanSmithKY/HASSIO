@@ -1,0 +1,3 @@
+discord_user_dan:
+  name: Dan's Discord user ID
+  initial: !secret discord_user_dan

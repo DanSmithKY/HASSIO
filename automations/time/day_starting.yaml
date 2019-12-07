@@ -1,0 +1,24 @@
+alias: time_day_starting
+trigger:
+  - platform: time
+    at: "00:00:00"
+action:
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.home_from_work_ash
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.home_from_work_dan
+  - service: input_datetime.set_datetime
+    entity_id: input_datetime.ash_comehome_time
+    data_template:
+      time: >
+        {% if now().weekday() == 0 %}
+          {{ state_attr('input_datetime.ash_comehome_mon', 'timestamp') | timestamp_custom("%H:%M:%S", false) }}
+        {% elif now().weekday() == 1 %}
+          {{ state_attr('input_datetime.ash_comehome_tues', 'timestamp') | timestamp_custom("%H:%M:%S", false) }}
+        {% elif now().weekday() == 2 %}
+          {{ state_attr('input_datetime.ash_comehome_wed', 'timestamp') | timestamp_custom("%H:%M:%S", false) }}
+        {% elif now().weekday() == 3 %}
+          {{ state_attr('input_datetime.ash_comehome_thurs', 'timestamp') | timestamp_custom("%H:%M:%S", false) }}
+        {% elif now().weekday() == 4 %}
+          {{ state_attr('input_datetime.ash_comehome_fri', 'timestamp') | timestamp_custom("%H:%M:%S", false) }}
+        {% endif %}

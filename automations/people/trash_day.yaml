@@ -9,6 +9,8 @@ condition:
     - wed
 action:
   service: notify.discord_general
-  data:
-    message: "Trash day!"
+  data_template:
+    message: |
+      {{ states('input_text.discord_user_dan') }}
+      Trash day!
     target: [!secret discord_channel_id_general]

@@ -4,9 +4,9 @@ sensors:
     friendly_name: 'Too humid'
     value_template:
       "{{
-        states('sensor.aeotec_zw100_multisensor_6_relative_humidity')|int
-        - states('sensor.aeotec_zw100_multisensor_6_relative_humidity_2')|int
+        states('sensor.master_bath_multisensor_humidity')|int
+        - states('sensor.family_room_multisensor_humidity')|int
         > 5
       }}"
     delay_on: '00:01:00'
-    delay_off: '00:02:00'
+    delay_off: '00:01:00'

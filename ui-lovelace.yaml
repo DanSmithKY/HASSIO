@@ -4,43 +4,79 @@ views:
     panel: false
     icon: mdi:home
     cards:
-      - type: sensor
-        entity: sensor.dark_sky_apparent_temperature
-        name: Outside Temp
-        graph: line
-      - type: sensor
-        entity: sensor.family_room_thermostat_temperature
-        name: Inside Temp
-        graph: line
-      - type: gauge
-        entity: sensor.aeotec_zw100_multisensor_6_relative_humidity_2
-        name: Inside Humidity
-      - type: gauge
-        entity: sensor.dark_sky_humidity
-        name: Outside Humidity
+      - type: weather-forecast
+        entity: weather.dark_sky
+      - type: thermostat
+        entity: climate.family_room
+      - type: glance
+        entities:
+          - entity: sensor.dan_commute_to_work
+            name: Dan's Commute
+            tap_action:
+              action: call-service
+              service: notify.discord_general
+              service_data:
+                message: |
+                  {{ states('input_text.discord_user_dan') }}
+                  travel time
+                      {{ states('sensor.dan_commute_to_work') }} minutes
+                  route
+                      {{ state_attr('sensor.dan_commute_to_work', 'route') }}
+                target: [!secret discord_channel_id_commute]
+          - entity: sensor.ash_commute_to_work
+            name: Ashly's Commute
+            tap_action:
+              action: call-service
+              service: notify.discord_general
+              service_data:
+                message: |
+                  {{ states('input_text.discord_user_ash') }}
+                  travel time
+                      {{ states('sensor.ash_commute_to_work') }} minutes
+                  route
+                      {{ state_attr('sensor.ash_commute_to_work', 'route') }}
+                target: [!secret discord_channel_id_commute]
       - type: glance
         entities:
           - entity: binary_sensor.master_poop_closet_nightlight
             name: Master Bath Nightlight
-          - entity: switch.aeotec_zw096_smart_switch_6_switch
+          - entity: light.espresso_machine_rgb_switch
             name: Espresso Machine
             icon: mdi:coffee
-            tap_action:
-              action: toggle
-          - entity: switch.homeseer_hs_ws200_wall_switch_switch_2
+          - entity: switch.front_house_light_switch
             name: Front House Lights
             icon: mdi:lightbulb
             tap_action:
               action: toggle
-          - entity: binary_sensor.aeotec_zw112_door_window_sensor_6_sensor
+          - entity: binary_sensor.garage_interior_door_contact
             name: Garage Door
+      - type: vertical-stack
+        title: Temperature
+        cards:
+          - type: sensor
+            entity: sensor.dark_sky_apparent_temperature
+            name: Outside
+            graph: line
+          - type: sensor
+            entity: sensor.family_room_thermostat_temperature
+            name: Inside
+            graph: line
+      - type: vertical-stack
+        title: Humidity
+        cards:
+          - type: sensor
+            entity: sensor.dark_sky_humidity
+            name: Outside
+            graph: line
+          - type: sensor
+            entity: sensor.game_room_multisensor_humidity
+            name: Inside
+            graph: line
 
   - title: Temperature, Humidity, and Weather
     panel: false
     icon: mdi:thermometer-lines
     cards:
-      - type: thermostat
-        entity: climate.family_room
       - type: entities
         title: Weather
         show_header_toggle: false
@@ -68,30 +104,48 @@ views:
             name: Wind Speed
           - entity: sensor.dark_sky_wind_gust
             name: Gusts
-      - type: history-graph
+      - type: vertical-stack
         title: 'Temperature'
-        entities:
-          - entity: sensor.aeotec_zw100_multisensor_6_temperature
-            name: Master Bath
-          - entity: sensor.aeotec_zw100_multisensor_6_temperature_2
-            name: Family Room
-          - entity: sensor.family_room_thermostat_temperature
-            name: Nest
-          - entity: sensor.dark_sky_temperature
-            name: Dark Sky
-        refresh_interval: 600
-      - type: history-graph
+        cards:
+          - type: history-graph
+            title: 'Inside Temperature'
+            refresh_interval: 600
+            entities:
+              - entity: sensor.game_room_multisensor_temperature
+                name: Game Room
+              - entity: sensor.family_room_multisensor_temperature
+                name: Family Room
+              - entity: sensor.master_bath_multisensor_temperature
+                name: Master Bath
+              - entity: sensor.family_room_thermostat_temperature
+                name: Nest
+          - type: history-graph
+            title: 'Outside Temperature'
+            refresh_interval: 600
+            entities:
+              - entity: sensor.dark_sky_temperature
+                name: Dark Sky
+      - type: vertical-stack
         title: 'Humidity'
-        entities:
-          - entity: sensor.aeotec_zw100_multisensor_6_relative_humidity
-            name: Master Bath
-          - entity: sensor.aeotec_zw100_multisensor_6_relative_humidity_2
-            name: Family Room
-          - entity: sensor.family_room_thermostat_humidity
-            name: Nest
-          - entity: sensor.dark_sky_humidity
-            name: Dark Sky
-        refresh_interval: 600
+        cards:
+          - type: history-graph
+            title: 'Inside Humidity'
+            refresh_interval: 600
+            entities:
+              - entity: sensor.game_room_multisensor_humidity
+                name: Game Room
+              - entity: sensor.family_room_multisensor_humidity
+                name: Family Room
+              - entity: sensor.master_bath_multisensor_humidity
+                name: Master Bath
+              - entity: sensor.family_room_thermostat_humidity
+                name: Nest
+          - type: history-graph
+            title: 'Outside Humidity'
+            refresh_interval: 600
+            entities:
+              - entity: sensor.dark_sky_humidity
+                name: Dark Sky
 
   - title: Automations
     panel: false
@@ -154,6 +208,50 @@ views:
             refresh_interval: 600
             hours_to_show: 6
 
+  - title: Ash
+    panel: false
+    cards:
+      - type: entities
+        title: Monday
+        show_header_toggle: false
+        entities:
+          - input_boolean.ash_working_mon
+          - input_datetime.ash_comehome_mon
+      - type: entities
+        title: Tuesday
+        show_header_toggle: false
+        entities:
+          - input_boolean.ash_working_tues
+          - input_datetime.ash_comehome_tues
+      - type: entities
+        title: Wednesday
+        show_header_toggle: false
+        entities:
+          - input_boolean.ash_working_wed
+          - input_datetime.ash_comehome_wed
+      - type: entities
+        title: Thursday
+        show_header_toggle: false
+        entities:
+          - input_boolean.ash_working_thurs
+          - input_datetime.ash_comehome_thurs
+      - type: entities
+        title: Friday
+        show_header_toggle: false
+        entities:
+          - input_boolean.ash_working_fri
+          - input_datetime.ash_comehome_fri
+  
+  - title: Dan
+    panel: false
+    cards:
+      - type: entities
+        title: Commute
+        show_header_toggle: false
+        entities:
+          - sensor.dan_commute_to_work
+          - sensor.dan_commute_to_home
+
   - title: Test
     panel: false
     icon: mdi:test-tube
@@ -178,6 +276,21 @@ views:
           - entity: binary_sensor.master_bath_too_humid
             name: Master Bath Too Humid
             icon: mdi:water-percent
+          - entity: binary_sensor.workday_ash
+            name: Ash Workday
+            icon: mdi:worker
+          - entity: binary_sensor.probably_commuting_ash
+            name: Ash commuting
+            icon: mdi:car-hatchback
+          - entity: binary_sensor.probably_commuting_dan
+            name: Dan commuting
+            icon: mdi:car-sports
+          - entity: input_datetime.ash_comehome_time
+            name: Ash Commute Start
+          - entity: input_boolean.home_from_work_ash
+            name: Ash Home From Work
+          - entity: input_boolean.home_from_work_dan
+            name: Dan Home From Work
       - type: glance
         entities:
           - climate.family_room
@@ -191,3 +304,21 @@ views:
           - sensor.family_room_thermostat_operation_mode
           - sensor.family_room_thermostat_target
           - sensor.family_room_thermostat_temperature
+      - type: glance
+        entities:
+          - binary_sensor.family_room_multisensor_contact
+          - binary_sensor.game_room_multisensor_contact
+          - binary_sensor.master_bath_multisensor_contact
+      - type: history-graph
+        title: Espresso Machine Power
+        entities:
+          - entity: sensor.espresso_machine_power_8
+            name: Watts
+        refresh_interval: 600
+        hours_to_show: 24
+      - type: entities
+        title: Switches
+        entities:
+          - switch.front_house_light_switch
+          - switch.poop_closet_light_switch
+          - switch.master_bath_fan_switch

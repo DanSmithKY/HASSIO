@@ -1,0 +1,5 @@
+logger:
+  default: info
+  logs:
+    homeassistant.components.http: warn
+    homeassistant.components.here_travel_time: debug

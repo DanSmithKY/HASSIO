@@ -1,0 +1,16 @@
+alias: people_motion_sensed
+trigger:
+  - platform: state
+    entity_id: binary_sensor.family_room_multisensor_contact
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.game_room_multisensor_contact
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.master_bath_multisensor_contact
+    to: 'on'
+action:
+  - service: notify.discord_general
+    data_template:
+      message: "Motion: {{ trigger.entity_id }}"
+      target: [!secret discord_channel_id_motion]

@@ -1,0 +1,3 @@
+discord_user_here:
+  name: Blast everyone in the channel on Discord
+  initial: "@here"

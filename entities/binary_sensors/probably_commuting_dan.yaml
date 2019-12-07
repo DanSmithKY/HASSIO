@@ -1,0 +1,10 @@
+platform: template
+sensors:
+  probably_commuting_dan:
+    friendly_name: 'Daniel Commuting'
+    value_template:
+      "{{
+        now().weekday() < 5
+        and states('sensor.time') >= ('15:00')
+        and states('sensor.time') < ('16:00')
+      }}"

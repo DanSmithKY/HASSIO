@@ -4,11 +4,17 @@ trigger:
   entity_id: binary_sensor.master_bath_too_humid
   to: 'on'
   from: 'off'
-  for: '00:01:00'
 action:
+  - service: notify.discord_general
+    data:
+      message: "It's getting humid in here!"
+      target: [!secret discord_channel_id_automations]
+  - condition: state
+    entity_id: switch.master_bath_fan_switch
+    state: 'off'
   - service: notify.discord_general
     data:
       message: "Somebody turn the vent on!"
       target: [!secret discord_channel_id_automations]
   - service: switch.turn_on
-    entity_id: switch.homeseer_technologies_hs_ws200_wall_switch_switch_2
+    entity_id: switch.master_bath_fan_switch

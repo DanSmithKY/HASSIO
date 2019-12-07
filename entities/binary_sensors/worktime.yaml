@@ -6,5 +6,5 @@ sensors:
       "{{
         states('sensor.time') >= '06:00'
         and states('sensor.time') < '16:00'
-        and states('binary_sensor.workweek') == 'on'
+        and states('binary_sensor.work_week') == 'on'
       }}"

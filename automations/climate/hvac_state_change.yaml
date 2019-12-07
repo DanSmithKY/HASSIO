@@ -1,0 +1,9 @@
+alias: hvac_state_change
+trigger:
+  - platform: state
+    entity_id: sensor.family_room_thermostat_hvac_state
+action:
+  service: notify.discord_general
+  data:
+    message: "HVAC state change ({{ states('sensor.family_room_thermostat_hvac_state') }})."
+    target: [!secret discord_channel_id_automations]

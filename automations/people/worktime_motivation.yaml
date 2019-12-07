@@ -6,14 +6,16 @@ trigger:
 action:
   service: notify.discord_general
   data:
-    message: >
-      {{
+    message: |
+      {{ states('input_text.discord_user_everyone') }}
+      >>> {{
         (
           "See ya later, Dan. At least someone around here works...",
           "Congrats Ash, you don't have to see Dan for hours!",
           "See y'all later. I'll just hang out here...",
-          "See ya! Wouldn't want to be ya!",
-          "I'm gonna stay. I'll be here if you need me."
+          "See ya! Wouldn't wanna be ya!",
+          "I'm gonna stay. I'll be here if you need me.",
+          "I hope Dr. Smith has a wonderful day!"
         )|random
       }}
-    target: [!secret discord_channel_id_automations]
+    target: [!secret discord_channel_id_general]

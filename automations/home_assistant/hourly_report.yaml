@@ -6,7 +6,31 @@ action:
   service: notify.discord_general
   data:
     message: |
-      Home Report
-      temp = {{ states('sensor.aeotec_zw100_multisensor_6_temperature_2') }}
-      humidity = {{ states('sensor.aeotec_zw100_multisensor_6_relative_humidity_2') }}
+      __**Hourly Report**__
+      >>> 
+          **Family Room**
+              temp
+                  `{{ states('sensor.family_room_multisensor_temperature') }}{{ state_attr('sensor.family_room_multisensor_temperature', 'unit_of_measurement') }}`
+              humidity
+                  `{{ states('sensor.family_room_multisensor_humidity') }}{{ state_attr('sensor.family_room_multisensor_humidity', 'unit_of_measurement') }}`
+          **Game Room**
+              temp
+                  `{{ states('sensor.game_room_multisensor_temperature') }}{{ state_attr('sensor.game_room_multisensor_temperature', 'unit_of_measurement') }}`
+              humidity
+                  `{{ states('sensor.game_room_multisensor_humidity') }}{{ state_attr('sensor.game_room_multisensor_humidity', 'unit_of_measurement') }}`
+          **Master Bath**
+              temp
+                  `{{ states('sensor.master_bath_multisensor_temperature') }}{{ state_attr('sensor.master_bath_multisensor_temperature', 'unit_of_measurement') }}`
+              humidity
+                  `{{ states('sensor.master_bath_multisensor_humidity') }}{{ state_attr('sensor.master_bath_multisensor_humidity', 'unit_of_measurement') }}`
+
+          **Thermostat**
+              status
+                  `{{ states('binary_sensor.family_room_thermostat_online') }}`
+              temp
+                  `{{ states('sensor.family_room_thermostat_temperature') }}{{ state_attr('sensor.family_room_thermostat_temperature', 'unit_of_measurement') }}`
+              target temp
+                  `{{ states('sensor.family_room_thermostat_target') }}{{ state_attr('sensor.family_room_thermostat_target', 'unit_of_measurement') }}`
+              operation mode
+                  `{{ states('sensor.family_room_thermostat_operation_mode') }}`
     target: [!secret discord_channel_id_reports]

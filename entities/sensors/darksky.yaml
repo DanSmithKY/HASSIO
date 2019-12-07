@@ -16,7 +16,9 @@ monitored_conditions:
   - apparent_temperature_high
   - apparent_temperature_low
   - precip_intensity_max
+  - hourly_summary
+  - daily_summary
 units: us
 scan_interval:
-  minutes: 5
+  minutes: 15
 language: en

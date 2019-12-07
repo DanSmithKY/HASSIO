@@ -1,0 +1,21 @@
+alias: people_just_got_home_dan
+trigger:
+  platform: state
+  entity_id: binary_sensor.garage_interior_door_contact
+  to: 'on'
+condition:
+  - condition: state
+    entity_id: binary_sensor.probably_commuting_dan
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.home_from_work_dan
+    state: 'off'
+action:
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.home_from_work_dan
+  - service: notify.discord_general
+    data:
+      message: |
+          {{ states('input_text.discord_user_everyone') }}
+          It looks like Dan just got home!
+      target: [!secret discord_channel_id_general]

@@ -1,0 +1,35 @@
+platform: template
+sensors:
+  workday_ash:
+    friendly_name: 'Ashly Workday'
+    value_template:
+      "{{
+        states('sensor.time') >= '00:00'
+        and
+        (
+          (
+            now().weekday() == 0
+            and states('input_boolean.ash_working_mon') == 'on'
+          )
+          or
+          (
+            now().weekday() == 1
+            and states('input_boolean.ash_working_tues') == 'on'
+          )
+          or
+          (
+            now().weekday() == 2
+            and states('input_boolean.ash_working_wed') == 'on'
+          )
+          or
+          (
+            now().weekday() == 3
+            and states('input_boolean.ash_working_thurs') == 'on'
+          )
+          or
+          (
+            now().weekday() == 4
+            and states('input_boolean.ash_working_fri') == 'on'
+          )
+        )
+      }}"

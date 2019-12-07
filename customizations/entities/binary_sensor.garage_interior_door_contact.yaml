@@ -1,0 +1,3 @@
+binary_sensor.garage_interior_door_contact:
+  hidden: false
+  device_class: door

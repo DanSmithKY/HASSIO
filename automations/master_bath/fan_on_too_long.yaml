@@ -1,14 +1,17 @@
-alias: master_bath_not_too_humid
+alias: master_bath_fan_on_too_long
 trigger:
   platform: state
+  entity_id: switch.master_bath_fan_switch
+  to: 'on'
+  for: '00:45:00'
+condition:
+  condition: state
   entity_id: binary_sensor.master_bath_too_humid
-  to: 'off'
-  from: 'on'
-  for: '00:05:00'
+  state: 'off'
 action:
   - service: notify.discord_general
     data:
-      message: "Turn the vent off!"
+      message: "The fan has been on for too long!"
       target: [!secret discord_channel_id_automations]
   - service: switch.turn_off
     entity_id: switch.master_bath_fan_switch

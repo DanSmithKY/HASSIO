@@ -1,0 +1,25 @@
+alias: home_assistant_nightly_report
+initial_state: 'on'
+trigger:
+  - platform: time
+    at: "19:30:00"
+action:
+  service: notify.discord_general
+  data_template:
+    message: |
+      {{ states('input_text.discord_user_everyone') }}
+      __**Nightly Report**__
+      >>> 
+          **weather forecast**
+              `{{ states('sensor.dark_sky_hourly_summary') }}`
+
+          **overnight low**
+              `{{ states('sensor.dark_sky_overnight_low_apparent_temperature_0d') }}{{ state_attr('sensor.dark_sky_overnight_low_apparent_temperature_0d', 'unit_of_measurement') }}`
+              
+          **tomorrow's high**
+              `{{ states('sensor.dark_sky_daytime_high_apparent_temperature_1d') }}{{ state_attr('sensor.dark_sky_daytime_high_apparent_temperature_1d', 'unit_of_measurement') }}`
+          **tomorrow night's low**
+              `{{ states('sensor.dark_sky_overnight_low_apparent_temperature_1d') }}{{ state_attr('sensor.dark_sky_overnight_low_apparent_temperature_1d', 'unit_of_measurement') }}`
+          **tommorow's precipitation chance**
+              `{{ states('sensor.dark_sky_precip_probability_1d') }}{{ state_attr('sensor.dark_sky_precip_probability_1d', 'unit_of_measurement') }}`
+    target: [!secret discord_channel_id_general]

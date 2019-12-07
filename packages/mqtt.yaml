@@ -2,4 +2,11 @@ mqtt:
   broker: core-mosquitto
   username: !secret mqtt_username
   password: !secret mqtt_password
-  # discovery: true
+  discovery: true
+  discovery_prefix: homeassistant
+  birth_message:
+    topic: 'hass/status'
+    payload: 'online'
+  will_message:
+    topic: 'hass/status'
+    payload: 'offline'

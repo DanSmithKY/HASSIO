@@ -1,0 +1,3 @@
+discord_user_everyone:
+  name: Blast everyone on Discord
+  initial: "@everyone"

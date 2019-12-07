@@ -4,5 +4,5 @@ trigger:
   entity_id: binary_sensor.coffeetime
   to: 'on'
 action:
-  - service: switch.turn_on
-    entity_id: switch.aeotec_zw096_smart_switch_6_switch
+  - service: light.turn_on
+    entity_id: light.espresso_machine_rgb_switch
